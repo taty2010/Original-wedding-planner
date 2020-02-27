@@ -6,6 +6,7 @@ import './App.css';
 import weddingEventContext from "./Contexts/WeddingEventContext";
 
 function App() {
+  const [savedList, setSavedList] = useState([]);
   const [weddingEvent, setweddingEvent] = useState([]);
   return (
     <div className='App'>
