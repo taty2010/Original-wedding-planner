@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Route } from "react-router-dom";
 import './App.css';
 import { Route, Link } from 'react-router-dom';
 import Home from './Components/Home';
 import Login from './Components/Login';
 import Register from './Components/Register';
 
+// Components
+import weddingEventContext from "./Contexts/WeddingEventContext";
+
 function App() {
+  const [savedList, setSavedList] = useState([]);
+  const [weddingEvent, setweddingEvent] = useState([]);
   return (
     <div className='App'>
       <nav>
