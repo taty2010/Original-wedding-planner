@@ -17,6 +17,7 @@ const handleChanges = e => {
     axiosWithAuth()
     .post('/auth/login', user)
     .then(res => {
+      console.log(res)
         localStorage.setItem('token', res.data.payload);
         props.history.push('/protected');
         console.log('login form submitted');
