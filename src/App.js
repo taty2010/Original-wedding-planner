@@ -1,32 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import { Route } from "react-router-dom";
 import './App.css';
-import axios from "axios";
-
-
-
+import { Route, Link } from 'react-router-dom';
+import Home from './Components/Home';
+import Login from './Components/Login';
+import Register from './Components/Register';
 
 // Components
-import Home from './Components/Home';
-import weddingEventContext from './Contexts/WeddingEventContext';       
+import weddingEventContext from "./Contexts/WeddingEventContext";
+import {axiosWithAuth} from './Components/Authentication/axiosWithAuth';
+import ProtectedRoute from './Components/Authentication/ProtectedRoute';
+import CreatePost from './Components/CreatePost';
 
 function App() {
   const [savedList, setSavedList] = useState([]);
   const [weddingEvent, setWeddingEvent] = useState([]);
 
   useEffect(() => {
-    axios
+    axiosWithAuth()
             .get("https://weddingportfolio.herokuapp.com/auth/user/")
             .then(res => console.log(res))
             .catch(err => console.log(err.response));
   }, [])
   
   return (
-    <weddingEventContext.Provider value= {{weddingEvent, setWeddingEvent}}>
-      <div className='App'>
-      <h1>Wedding Planner Portfolio</h1>
-      
-      <Route exact path='/' component= {Home} />
+    <weddingEventContext.Provider value={{weddingEvent, setWeddingEvent}}>
+    <div className='App'>
+      <nav>
+        <div className='navigation'>
+          <Link to='/' className='links'>
+            Home
+          </Link>
+          <Link to='/register' className='links'>
+            Register
+          </Link>
+          <Link to='/login' className='links'>
+            Login
+          </Link>
+          <Link to='/protected'className='links'>
+            Add Post
+          </Link>
+        </div>
+      </nav>
+      <Route exact path='/' component={Home} />
+      <Route exact path='/register' component={Register} />
+      <Route exact path='/login' component={Login} />
+      <ProtectedRoute exact path='/protected' component={CreatePost}/>
     </div>
     </weddingEventContext.Provider>
     
