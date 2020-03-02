@@ -1,36 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import axios from "axios"
 import { Link } from "react-router-dom";
 import WeddingCard from "./WeddingCard";
 import weddingEventContext from "../Contexts/WeddingEventContext";
 
-const Home = () => {
-    const { weddingEvent, setWeddingEvent } = useContext(weddingEventContext);
+export default function Home() {
+    // const { weddingEvent, setWeddingEvent } = useContext(weddingEventContext);
 
-    useEffect(() => {
-        getWeddingEvents = (res) => {
-            setWeddingEvent(res.data)
-        }
+    // const getWeddingEvents = (res) => {
+    //         setWeddingEvent(res.data)
 
-    }, [])
-
-
-      const weddingEventsGetRequest = () => {
-        axios
-          .get("WEDDING EVENTS API")
-          .then(res => this.getWeddingEvents(res))
-          .catch(err => console.log(err.response));
-      }
+    //   const weddingEventsGetRequest = () => {
+    //     axios
+    //       .get("https://weddingportfolio.herokuapp.com/auth/user/")
+    //     //   .then(res => getWeddingEvents(res))
+    //       .catch(err => console.log(err.response));
+    //   }
     return (
         <div className="home">
-            {weddingEvent.map( event => (
+            <h1>Hey!!!</h1>
+            {/* {weddingEvent.map( event => (
                 <EventDetails key={event.id} event={event} />
-            ))}
+            ))} */}
         </div>
     )
 }
-
-export default Home;
+// }
 
 function EventDetails({event}) {
     return (
