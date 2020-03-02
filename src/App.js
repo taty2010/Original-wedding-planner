@@ -8,6 +8,9 @@ import Register from './Components/Register';
 
 // Components
 import weddingEventContext from "./Contexts/WeddingEventContext";
+import axiosWithAuth from './Components/Authentication/axiosWithAuth';
+import ProtectedRoute from './Components/Authentication/ProtectedRoute';
+import CreatePost from './Components/CreatePost';
 
 function App() {
   const [savedList, setSavedList] = useState([]);
@@ -25,11 +28,15 @@ function App() {
           <Link to='/login' className='links'>
             Login
           </Link>
+          <Link to='/protected'className='links'>
+            Add Post
+          </Link>
         </div>
       </nav>
       <Route exact path='/' component={Home} />
       <Route exact path='/register' component={Register} />
       <Route exact path='/login' component={Login} />
+      <ProtectedRoute exact path='/protected' component={CreatePost}/>
     </div>
   );
 }
