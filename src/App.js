@@ -7,24 +7,30 @@ import Register from './Components/Register';
 
 // Components
 import weddingEventContext from "./Contexts/WeddingEventContext";
+import UserContext from "./Contexts/UserContext";
 import {axiosWithAuth} from './Components/Authentication/axiosWithAuth';
 import ProtectedRoute from './Components/Authentication/ProtectedRoute';
+import {UserProfile} from './Components/UserProfile';
 import CreatePost from './Components/CreatePost';
 import axios from 'axios'
 
 function App() {
   const [savedList, setSavedList] = useState([]);
   const [weddingEvent, setWeddingEvent] = useState([]);
+  const [user, setuser] = useState([])
 
   useEffect(() => {
     axiosWithAuth()
             .get("https://weddingportfolio.herokuapp.com/auth/user")
-            .then(res => console.log(res))
+            .then(res => setuser(res.data.user))
             .catch(err => console.log(err.response));
   }, [])
+
+  console.log(user)
   
   return (
     <weddingEventContext.Provider value={{weddingEvent, setWeddingEvent}}>
+      <UserContext.Provider value={user}>
     <div className='App'>
       <nav>
         <div className='navigation'>
@@ -37,16 +43,19 @@ function App() {
           <Link to='/login' className='links'>
             Login
           </Link>
-          <Link to='/protected'className='links'>
+          <Link to='/protected/'className='links'>
             Add Post
           </Link>
         </div>
       </nav>
       <Route exact path='/' component={Home} />
       <Route exact path='/register' component={Register} />
-      <Route exact path='/login' component={Login} />
-      <ProtectedRoute exact path='/protected' component={CreatePost}/>
+      <Route exact path='/login' render={(props) => {
+        return <Login {...props} userInfo={user}/>
+      }} />
+      <ProtectedRoute exact path='/protected/:id' component={UserProfile}/>
     </div>
+    </UserContext.Provider>
     </weddingEventContext.Provider>
     
   );

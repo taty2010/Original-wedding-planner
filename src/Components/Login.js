@@ -1,7 +1,20 @@
-import React, {useState} from 'react';
-import {axiosWithAuth} from './Authentication/axiosWithAuth'
+import React, {useState, useContext} from 'react';
+import {axiosWithAuth} from './Authentication/axiosWithAuth';
+import UserContext from "../Contexts/UserContext";
 
 export default function Login(props) {
+
+  const userInfo = useContext(UserContext);
+  const userStorage = useState(localStorage.getItem('username'))
+  
+  console.log(userStorage[0])
+ 
+   const currentUser = userInfo.filter(list => {
+    return list.username === userStorage[0]
+  })
+
+  const [getUserInfo, setGetUserInfo] = useState(currentUser)
+console.log(currentUser)
 
 const [user, getUser] = useState({
     username: '',
@@ -10,6 +23,7 @@ const [user, getUser] = useState({
 
 const handleChanges = e => {
     getUser({...user, [e.target.name]: e.target.value})
+    localStorage.setItem('username', user.username)
 }
 
   const handleSubmit = event => {
@@ -19,7 +33,9 @@ const handleChanges = e => {
     .then(res => {
       console.log(res)
         localStorage.setItem('token', res.data.token);
-        props.history.push('/protected');
+        currentUser.map(list => {
+          return props.history.push(`/protected/${list.id}`);
+        })
         console.log('login form submitted');
     })
     .catch(err => {

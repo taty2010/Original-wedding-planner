@@ -1,21 +1,23 @@
 import React from 'react';
 
-const WeddingCard = props => {
+const WeddingCard = ({event}) => {
+
   return (
     <div className="wedding-card">
-      <img src={props.image} alt= "wedding-img" />
+      hello
+      <img src={event.image} alt= "wedding-img" />
       <div className="description">
-        <p>Description: {props.description}</p>
+        <p>Description: {event.description}</p>
       </div>
-      <p>Wedding Location: {props.location}</p>
-      <p>Wedding Theme: {props.theme}</p>
-      <p>Wedding Vendors:</p>
+      <p>Wedding Location: {event.location}</p>
+      <p>Wedding Theme: {event.theme}</p>
+      <p>Wedding Vendors: {event.vendors}</p>
 
-      {props.vendors.map(vendor => (
+      {/* {event.vendors.map(vendor => (
         <div key={vendor} className="vendors">
           {vendor}
         </div>
-      ))}
+      ))} */}
     </div>
   );
 };
