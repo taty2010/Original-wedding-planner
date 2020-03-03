@@ -18,7 +18,7 @@ const handleChanges = e => {
     .post('/auth/login', user)
     .then(res => {
       console.log(res)
-        localStorage.setItem('token', res.data.payload);
+        localStorage.setItem('token', res.data.token);
         props.history.push('/protected');
         console.log('login form submitted');
     })

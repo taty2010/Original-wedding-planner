@@ -24,7 +24,7 @@ const handleChanges = e => {
     axiosWithAuth()
     .post('/auth/register', user)
     .then(res => {
-        localStorage.setItem('token', res.data.payload);
+        localStorage.setItem('token', res.data.token);
         props.history.push('/protected');
         console.log('register info form submitted');
     })
