@@ -9,14 +9,13 @@ const WeddingCard = props => {
       </div>
       <p>Wedding Location: {props.location}</p>
       <p>Wedding Theme: {props.theme}</p>
-      <p>Wedding Vendors:</p>
+      <p>Wedding Vendors: {props.vendors}</p>
 
-      {props.vendors.map(vendor => (
+      {/* {props.vendors.map(vendor => (
         <div key={vendor} className="vendors">
-          {vendor}
-        </div>
-      ))}
+          {vendor} */}
     </div>
+   
   );
 };
 
