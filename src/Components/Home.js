@@ -24,19 +24,18 @@ export default function Home() {
     return (
         <div className="home">
             <h1>Hey!!!</h1>
-            {weddingEvent.map( event => (
-                 <EventDetails key={event.id} event={event} />
+            {weddingEvent.map(event => (
+                <WeddingCard key={event.id} image={event.image} description={event.description} location={event.location} theme={event.theme} vendors={event.vendors} />
             ))}
         </div>
     )
 }
 // }
 
-function EventDetails({event}) {
-    
-    return (
-        <Link to={`/weddingevent/${event.id}`}>
-            <WeddingCard event={event} />
-        </Link>
-    )
-}
+// function EventDetails({event}) {
+//     return (
+//         <Link to={`/weddingevent/${event.id}`}>
+//             <WeddingCard event={event} />
+//         </Link>
+//     )
+// }

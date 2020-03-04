@@ -13,10 +13,13 @@ import ProtectedRoute from './Components/Authentication/ProtectedRoute';
 import {UserProfile} from './Components/UserProfile';
 import CreatePost from './Components/CreatePost';
 import axios from 'axios'
+import UserContext from "./Contexts/UserContext";
+import UserProfile from './Components/UserProfile'
 
 function App() {
   const [savedList, setSavedList] = useState([]);
   const [weddingEvent, setWeddingEvent] = useState([]);
+<<<<<<< HEAD
   const [user, setuser] = useState([])
 
   useEffect(() => {
@@ -56,9 +59,88 @@ function App() {
       <ProtectedRoute exact path='/protected/:id' component={UserProfile}/>
     </div>
     </UserContext.Provider>
+=======
+  const [user, setuser] = useState([]);
+  const userStorage = useState(localStorage.getItem("username"));
+
+  useEffect(() => {
+    axiosWithAuth()
+            .get("https://weddingportfolio.herokuapp.com/weddingposts")
+            .then(res => setWeddingEvent(res.data))
+            .catch(err => console.log(err.response));
+  }, [])
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get("https://weddingportfolio.herokuapp.com/auth/user")
+      .then(res => setuser(res.data.user))
+      .catch(err => console.log(err.response));
+  }, []);
+
+  const currentUser = user.filter(list => {
+    return list.username === userStorage[0];
+  });
+
+  console.log("current", currentUser);
+
+  return (
+    <weddingEventContext.Provider value={{ weddingEvent, setWeddingEvent }}>
+      <UserContext.Provider value={user}>
+        <div className="App">
+          <nav>
+            <div className="navigation">
+              <Link to="/" className="links">
+                Home
+              </Link>
+              <Link to="/register" className="links">
+                Register
+              </Link>
+              <Link to="/login" className="links">
+                Login
+              </Link>
+              <ProtectedLink id={currentUser} />
+              {/* <Link to="/protected/" className="links">
+                Add Post
+              </Link> */}
+            </div>
+          </nav>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/register" component={Register} />
+          <Route
+            exact
+            path="/login"
+            render={props => {
+              return (
+                <Login {...props} currentUser={currentUser} userInfo={user} />
+              );
+            }}
+          />
+          <ProtectedRoute
+            exact
+            path="/protected/:id"
+            id={currentUser}
+            component={UserProfile}
+          />
+        </div>
+      </UserContext.Provider>
+>>>>>>> origin
     </weddingEventContext.Provider>
-    
   );
 }
 
 export default App;
+
+export const ProtectedLink = ({ id }) => {
+  const [hello, sethello] = useState("");
+  useEffect(() => {
+    id.map(list => {
+      return sethello(list.id);
+    });
+  }, [id]);
+
+  return (
+    <Link to={`/protected/${hello}`} className="links">
+      Add Post
+    </Link>
+  );
+};

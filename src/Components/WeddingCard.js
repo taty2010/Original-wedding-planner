@@ -9,6 +9,7 @@ const WeddingCard = ({event}) => {
       <div className="description">
         <p>Description: {event.description}</p>
       </div>
+<<<<<<< HEAD
       <p>Wedding Location: {event.location}</p>
       <p>Wedding Theme: {event.theme}</p>
       <p>Wedding Vendors: {event.vendors}</p>
@@ -18,7 +19,17 @@ const WeddingCard = ({event}) => {
           {vendor}
         </div>
       ))} */}
+=======
+      <p>Wedding Location: {props.location}</p>
+      <p>Wedding Theme: {props.theme}</p>
+      <p>Wedding Vendors: {props.vendors}</p>
+
+      {/* {props.vendors.map(vendor => (
+        <div key={vendor} className="vendors">
+          {vendor} */}
+>>>>>>> origin
     </div>
+   
   );
 };
 
