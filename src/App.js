@@ -18,8 +18,8 @@ function App() {
 
   useEffect(() => {
     axiosWithAuth()
-            .get("https://weddingportfolio.herokuapp.com/auth/user")
-            .then(res => console.log(res))
+            .get("https://weddingportfolio.herokuapp.com/weddingposts")
+            .then(res => setWeddingEvent(res.data))
             .catch(err => console.log(err.response));
   }, [])
   
@@ -40,11 +40,15 @@ function App() {
           <Link to='/protected'className='links'>
             Add Post
           </Link>
+          <Link to='/home' className='links'>
+            Home
+          </Link>
         </div>
       </nav>
       <Route exact path='/' component={Home} />
       <Route exact path='/register' component={Register} />
       <Route exact path='/login' component={Login} />
+      <Route exact path='/home' component={Home} />
       <ProtectedRoute exact path='/protected' component={CreatePost}/>
     </div>
     </weddingEventContext.Provider>
