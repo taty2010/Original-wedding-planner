@@ -73,7 +73,6 @@ function App() {
               );
             }}
           />
-          <Redirect exact from="/protected" to={`/protected/${user.id}`} />
           <ProtectedRoute
             exact
             path="/protected/:id"
@@ -89,17 +88,17 @@ function App() {
 
 export default App;
 
-// export const ProtectedLink = ({ id }) => {
-//   const [hello, sethello] = useState("");
-//   // useEffect(() => {
-//   //   id.map(list => {
-//   //     return sethello(list.id);
-//   //   });
-//   // }, [id]);
+export const ProtectedLink = ({ id }) => {
+  const [hello, sethello] = useState("");
+  useEffect(() => {
+    id.map(list => {
+      return sethello(list.id);
+    });
+  }, [id]);
 
-//   return (
-//     <Link to={`/protected/${id.id}`} className="links">
-//       Add Post
-//     </Link>
-//   );
-// };
+  return (
+    <Link to={`/protected/${id.id}`} className="links">
+      Add Post
+    </Link>
+  );
+};

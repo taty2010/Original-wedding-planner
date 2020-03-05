@@ -10,16 +10,16 @@ export default function Login(props) {
 
   //   console.log(userStorage[0])
 
-  // useEffect(() => {
-  //   props.currentUser.map(list => {
-  //     return setid(list.id);
-  //   });
-  // }, [props.currentUser]);
+  useEffect(() => {
+    Object.values(props.currentUser).map(list => {
+      return setid(list.id);
+    });
+  }, [props.currentUser]);
 
   //   const [getUserInfo, setGetUserInfo] = useState(currentUser)
 
 
-  console.log('login', props);
+  console.log('login', props.currentUser);
 
   const [user, getUser] = useState({
     username: '',
@@ -34,10 +34,8 @@ export default function Login(props) {
       .post('/auth/login', user)
       .then(res => {
         localStorage.setItem("token", res.data.token);
+        props.history.push(`/protected/${id}`);
         console.log("login form submitted",props);
-      })
-      .then(res=>{
-        props.history.push(`/protected/${props.currentUser.id}`);
       })
       .catch(err => {
         localStorage.removeItem('token');
@@ -45,7 +43,7 @@ export default function Login(props) {
       });
       
   };
-
+  console.log("props",props);
 
   const handleChanges = e => {
     getUser({ ...user, [e.target.name]: e.target.value });
