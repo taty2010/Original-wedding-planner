@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from './Authentication/axiosWithAuth';
+import { Link } from 'react-router-dom';
 import '../App.css';
 
 export default function Register(props) {
@@ -36,6 +37,7 @@ export default function Register(props) {
 
   return (
     <div className='form-container'>
+      <h1>Sign Up</h1>
       <form onSubmit={handleSubmit} className='register-form'>
         <input
           type='text'
@@ -62,7 +64,7 @@ export default function Register(props) {
           className='register-field'
         />
         <input
-          type='text'
+          type='password'
           placeholder='Password'
           name='password'
           onChange={handleChanges}
@@ -109,7 +111,9 @@ export default function Register(props) {
           value={user.pricing}
           className='register-field'
         />
-
+        <p>
+          Already have an account? Sign in <Link to='/login'>here</Link>
+        </p>
         <input type='submit' className='button' />
       </form>
     </div>

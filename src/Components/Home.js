@@ -8,15 +8,6 @@ import weddingEventContext from '../Contexts/WeddingEventContext';
 export default function Home() {
   const { weddingEvent, setWeddingEvent } = useContext(weddingEventContext);
 
-  // const getWeddingEvents = (res) => {
-  //         setWeddingEvent(res.data)
-
-  //   const weddingEventsGetRequest = () => {
-  //     axios
-  //       .get("https://weddingportfolio.herokuapp.com/auth/user/")
-  //     //   .then(res => getWeddingEvents(res))
-  //       .catch(err => console.log(err.response));
-  //   }
   return (
     <div>
       <h1>Wedding Planner Portfolio</h1>
