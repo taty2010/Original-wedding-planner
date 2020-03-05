@@ -60,10 +60,9 @@ function App() {
               <Link to='/login' className='links'>
                 Login
               </Link>
-              <ProtectedLink id={currentUser} />
-              {/* <Link to="/protected/" className="links">
-                Add Post
-              </Link> */}
+              {localStorage.getItem('token') ? (
+                <ProtectedLink id={currentUser} />
+              ) : null}
             </div>
           </nav>
           <Route exact path='/' component={Home} />
@@ -80,7 +79,7 @@ function App() {
           <ProtectedRoute
             exact
             path='/protected/:id'
-            id={currentUser}
+            id={currentUser.id}
             component={UserProfile}
           />
         </div>
@@ -100,8 +99,8 @@ export const ProtectedLink = ({ id }) => {
   }, [id]);
 
   return (
-    <Link to={`/protected/${id.id}`} className='links'>
-      Add Post
+    <Link to={`/protected/${hello}`} className='links'>
+      My Profile
     </Link>
   );
 };
