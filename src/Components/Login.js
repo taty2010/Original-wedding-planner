@@ -4,7 +4,7 @@ import UserContext from '../Contexts/UserContext';
 import { ProtectedLink } from '../App';
 
 export default function Login(props) {
-  const userInfo = useContext(UserContext);
+  const { userInfo, setUserInfo } = useContext(UserContext);
   const userStorage = useState(localStorage.getItem('username'));
   const [id, setid] = useState(props.currentUser);
 
@@ -14,10 +14,6 @@ export default function Login(props) {
     });
   }, [props.currentUser]);
 
-  console.log(id);
-
-  console.log('login', props);
-
   const [user, getUser] = useState({
     username: '',
     password: ''
@@ -25,8 +21,8 @@ export default function Login(props) {
 
   console.log(props);
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const handleSubmit = e => {
+    e.preventDefault();
     axiosWithAuth()
       .post('/auth/login', user)
       .then(res => {
@@ -45,7 +41,7 @@ export default function Login(props) {
 
   const handleChanges = e => {
     getUser({ ...user, [e.target.name]: e.target.value });
-    localStorage.setItem('id', user.id);
+    localStorage.setItem('username', user.username);
   };
 
   return (
