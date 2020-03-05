@@ -36,6 +36,7 @@ export default function Register(props) {
 
   return (
     <div className='form-container'>
+      <h1>Sign Up</h1>
       <form onSubmit={handleSubmit} className='register-form'>
         <input
           type='text'
@@ -62,7 +63,7 @@ export default function Register(props) {
           className='register-field'
         />
         <input
-          type='text'
+          type='password'
           placeholder='Password'
           name='password'
           onChange={handleChanges}

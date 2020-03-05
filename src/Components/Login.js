@@ -8,15 +8,12 @@ export default function Login(props) {
   const userStorage = useState(localStorage.getItem('username'));
   const [id, setid] = useState(props.currentUser);
 
-  //   console.log(userStorage[0])
-
   useEffect(() => {
     props.currentUser.map(list => {
       return setid(list.id);
     });
   }, [props.currentUser]);
 
-  //   const [getUserInfo, setGetUserInfo] = useState(currentUser)
   console.log(id);
 
   console.log('login', props);
@@ -26,7 +23,7 @@ export default function Login(props) {
     password: ''
   });
 
-  // console.log("userid", props.currentUser[0]);
+  console.log(props);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -36,11 +33,12 @@ export default function Login(props) {
         console.log(res);
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('username', user.username);
-        props.history.push(ProtectedLink);
+        props.history.push(`/protected/${id}`);
         console.log('login form submitted');
       })
       .catch(err => {
         localStorage.removeItem('token');
+        window.alert('Incorrect username or password. Please try again.');
         console.log('Invalid Login', err);
       });
   };
@@ -52,25 +50,26 @@ export default function Login(props) {
 
   return (
     <div className='form-container'>
+      <h1>Sign In</h1>
       <form className='login-form' onSubmit={handleSubmit}>
         <input
           type='text'
-          placeholder='username'
+          placeholder='Username'
           name='username'
           onChange={handleChanges}
           value={user.username}
           className='field-container'
         />
         <input
-          type='text'
-          placeholder='password'
+          type='password'
+          placeholder='Password'
           name='password'
           onChange={handleChanges}
           value={user.password}
           className='field-container'
         />
 
-        <input type='submit' />
+        <input type='submit' className='button' />
       </form>
     </div>
   );

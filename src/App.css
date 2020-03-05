@@ -152,3 +152,7 @@
   transform: rotateY(180deg);
   border-radius: 10px;
 }
+
+.text-container {
+  margin-top: 22%;
+}
