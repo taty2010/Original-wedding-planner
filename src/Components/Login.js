@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { axiosWithAuth } from './Authentication/axiosWithAuth';
 import UserContext from '../Contexts/UserContext';
 import { ProtectedLink } from '../App';
@@ -12,7 +13,7 @@ export default function Login(props) {
     props.currentUser.map(list => {
       return setid(list.id);
     });
-  }, [props.currentUser]);
+  }, []);
 
   const [user, getUser] = useState({
     username: '',
@@ -29,7 +30,7 @@ export default function Login(props) {
         console.log(res);
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('username', user.username);
-        props.history.push(`/protected/${id}`);
+        props.history.push(`/`);
         console.log('login form submitted');
       })
       .catch(err => {
@@ -64,7 +65,9 @@ export default function Login(props) {
           value={user.password}
           className='field-container'
         />
-
+        <p>
+          Don't have an account? Sign up <Link to='/register'>here</Link>
+        </p>
         <input type='submit' className='button' />
       </form>
     </div>
