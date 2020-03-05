@@ -13,6 +13,7 @@ import ProtectedRoute from './Components/Authentication/ProtectedRoute';
 import CreatePost from './Components/CreatePost';
 import axios from 'axios';
 import UserProfile from './Components/UserProfile';
+import profileIcon from './Assets/user-circle-solid.png';
 
 function App() {
   const [savedList, setSavedList] = useState([]);
@@ -100,7 +101,7 @@ export const ProtectedLink = ({ id }) => {
 
   return (
     <Link to={`/protected/${hello}`} className='links'>
-      My Profile
+      <img src={profileIcon} alt={'My Profile'} />
     </Link>
   );
 };
