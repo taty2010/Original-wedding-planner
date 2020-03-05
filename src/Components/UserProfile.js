@@ -1,20 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
-import { axiosWithAuth } from "./Authentication/axiosWithAuth";
-import UserContext from "../Contexts/UserContext";
-import Login from "./Login";
-import { Route, Link } from "react-router-dom";
-
+import React, { useState, useEffect, useContext } from 'react';
+import { axiosWithAuth } from './Authentication/axiosWithAuth';
+import UserContext from '../Contexts/UserContext';
+import Login from './Login';
+import { Route, Link } from 'react-router-dom';
 
 const UserProfile = props => {
   const userInfo = useContext(UserContext);
-  //   const user = useState(localStorage.getItem("username"));
 
   const paramItemId = props.match.params.id;
   const getUser = userInfo.filter(list => {
     return list.id === Number(paramItemId);
   })[0];
-
-  //   console.log("getUser", Object(getUser));
 
   return (
     <div>
@@ -31,4 +27,4 @@ const UserProfile = props => {
   );
 };
 
-export default UserProfile
+export default UserProfile;
