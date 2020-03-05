@@ -18,6 +18,14 @@
   }
 }
 
+.userpostimg{
+  width: 40vw;
+}
+
+.user-posts{
+  padding: 2%;
+}
+
 /* User Profile */
 .user{
   width: 95vw;

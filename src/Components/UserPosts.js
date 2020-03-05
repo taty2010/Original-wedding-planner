@@ -41,7 +41,7 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
     const update = e => {
          e.preventDefault()
         axiosWithAuth()
-        .put(`/auth/user/${match.params.id}/posts/${updatePost.id}`, updatePost)
+        .put(`/auth/user/${match.params.id}/post/${updatePost.id}`, updatePost)
         .then(res => {
             updateUserPosts(res.data);
             // setEditDesc(false)
@@ -51,7 +51,7 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
 
       const remove = post => {
         axiosWithAuth()
-          .delete(`/auth/user/${match.params.id}/posts/${updatePost.id}`)
+          .delete(`/auth/user/${match.params.id}/post/${updatePost.id}`)
           .then(res => {
             console.log(res.data)
             updateUserPosts(userPosts.filter(item => item.id !== posts.id))
@@ -67,7 +67,7 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
     <div className='user-posts'>
         <button onClick={e => remove()}>delete</button>
         {/* {!editImg ? ( */}
-            <img onClick={(e)=> {e.stopPropagation(); setEditImg(!editImg)}} src={posts.image} alt={posts.description}/>
+            <img className='userpostimg' onClick={(e)=> {e.stopPropagation(); setEditImg(!editImg)}} src={posts.image} alt={posts.description}/>
         {/* ):(
             <form onSubmit={update}>
             <input

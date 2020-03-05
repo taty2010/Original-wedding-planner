@@ -19,7 +19,7 @@ export default function Login(props) {
   //   const [getUserInfo, setGetUserInfo] = useState(currentUser)
 
 
-  console.log('login', props.currentUser);
+  console.log('login', id);
 
   const [user, getUser] = useState({
     username: '',
@@ -34,7 +34,7 @@ export default function Login(props) {
       .post('/auth/login', user)
       .then(res => {
         localStorage.setItem("token", res.data.token);
-        props.history.push(`/protected/${id}`);
+        props.history.push(`/protected/`);
         console.log("login form submitted",props);
       })
       .catch(err => {

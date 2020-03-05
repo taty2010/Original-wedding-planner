@@ -13,6 +13,7 @@ import ProtectedRoute from './Components/Authentication/ProtectedRoute';
 import CreatePost from './Components/CreatePost';
 import axios from 'axios'
 import UserProfile from './Components/UserProfile'
+import UserHome from './Components/UserHome';
 
 function App() {
   const [savedList, setSavedList] = useState([]);
@@ -77,7 +78,7 @@ function App() {
             exact
             path="/protected/:id"
             id={userLoggedIn}
-            component={UserProfile}
+            component={UserHome}
           />
           </Switch>
         </div>
