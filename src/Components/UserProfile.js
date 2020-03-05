@@ -1,19 +1,18 @@
-import React, { useState, useEffect, useContext } from "react";
-import { axiosWithAuth } from "./Authentication/axiosWithAuth";
-import UserContext from "../Contexts/UserContext";
-import Login from "./Login";
-import { Route, Link } from "react-router-dom";
-import CreatePost from "./CreatePost";
-
+import React, { useState, useEffect, useContext } from 'react';
+import { axiosWithAuth } from './Authentication/axiosWithAuth';
+import UserContext from '../Contexts/UserContext';
+import Login from './Login';
+import { Route, Link } from 'react-router-dom';
+import CreatePost from './CreatePost';
 
 const UserProfile = props => {
-  const {user, setUser} = useContext(UserContext);
+  const userInfo = useContext(UserContext);
+  //   const user = useState(localStorage.getItem("username"));
 
   const paramItemId = props.match.params.id;
-  const getUser = user.filter(list => {
+  const getUser = userInfo.filter(list => {
     return list.id === Number(paramItemId);
   })[0];
-
 
   return (
     <div className='user'>
@@ -28,11 +27,14 @@ const UserProfile = props => {
         <p>Email: {Object(getUser).email}</p>
         <p>Pricing: {Object(getUser).pricing}</p>
       </div>
-      <Route to='createpost' render={(props) =>{ 
-        return <CreatePost {...props} user={user}/> 
-      }}/>
+      <Route
+        to='createpost'
+        render={props => {
+          return <CreatePost {...props} user={userInfo} />;
+        }}
+      />
     </div>
   );
 };
 
-export default UserProfile
+export default UserProfile;

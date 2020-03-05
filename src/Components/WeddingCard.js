@@ -12,13 +12,12 @@ const WeddingCard = props => {
           </div>
         </div>
         <div className='wedding-card-back'>
-          <p>Wedding Location: {props.location}</p>
-          <p>Wedding Theme: {props.theme}</p>
-          <p>Wedding Vendors: {props.vendors}</p>
+          <div className='text-container'>
+            <p>Location: {props.location}</p>
+            <p>Theme: {props.theme}</p>
+            <p>Vendors: {props.vendors}</p>
+          </div>
         </div>
-        {/* {props.vendors.map(vendor => (
-        <div key={vendor} className="vendors">
-          {vendor} */}
       </div>
     </div>
   );

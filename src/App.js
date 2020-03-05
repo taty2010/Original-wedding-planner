@@ -6,20 +6,20 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 
 // Components
-import weddingEventContext from "./Contexts/WeddingEventContext";
-import UserContext from "./Contexts/UserContext";
-import {axiosWithAuth} from './Components/Authentication/axiosWithAuth';
+import weddingEventContext from './Contexts/WeddingEventContext';
+import UserContext from './Contexts/UserContext';
+import { axiosWithAuth } from './Components/Authentication/axiosWithAuth';
 import ProtectedRoute from './Components/Authentication/ProtectedRoute';
 import CreatePost from './Components/CreatePost';
-import axios from 'axios'
-import UserProfile from './Components/UserProfile'
+import axios from 'axios';
+import UserProfile from './Components/UserProfile';
 
 function App() {
   const [savedList, setSavedList] = useState([]);
   const [weddingEvent, setWeddingEvent] = useState([]);
   const [user, setUser] = useState([]);
   const [userLoggedIn, setUserLoggedIn] = useState([]);
-  const userStorage = useState(localStorage.getItem("username"));
+  const userStorage = useState(localStorage.getItem('username'));
 
   useEffect(() => {
     axiosWithAuth()
@@ -30,21 +30,25 @@ function App() {
 
   useEffect(() => {
     axiosWithAuth()
-      .get("https://weddingportfolio.herokuapp.com/auth/user")
+      .get('https://weddingportfolio.herokuapp.com/auth/user')
       .then(res => {
-          const currentUser = res.data.user.filter(list => 
-             list.username === userStorage[0]
-          )[0]
-          setUserLoggedIn(currentUser)
-          setUser(res.data.user)
-        })
+        const currentUser = res.data.user.filter(
+          list => list.username === userStorage[0]
+        )[0];
+        setUserLoggedIn(currentUser);
+        setUser(res.data.user);
+      })
       .catch(err => console.log(err.response));
   }, []);
 
+  const currentUser = user.filter(list => {
+    return list.username === userStorage[0];
+  });
+
   return (
     <weddingEventContext.Provider value={{ weddingEvent, setWeddingEvent }}>
-      <UserContext.Provider value={{user, setUser}}>
-        <div className="App">
+      <UserContext.Provider value={user}>
+        <div className='App'>
           <nav>
             <div className='navigation'>
               <Link to='/' className='links'>
@@ -56,31 +60,29 @@ function App() {
               <Link to='/login' className='links'>
                 Login
               </Link>
-              <Link to={`/protected/${userLoggedIn.id}`} className="links">
-                Profile
-              </Link>
+              <ProtectedLink id={currentUser} />
+              {/* <Link to="/protected/" className="links">
+                Add Post
+              </Link> */}
             </div>
           </nav>
-          <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/register" component={Register} />
+          <Route exact path='/' component={Home} />
+          <Route exact path='/register' component={Register} />
           <Route
             exact
             path='/login'
             render={props => {
               return (
-                <Login {...props} currentUser={userLoggedIn} userInfo={user} />
+                <Login {...props} currentUser={currentUser} userInfo={user} />
               );
             }}
           />
-          <Redirect exact from="/protected" to={`/protected/${user.id}`} />
           <ProtectedRoute
             exact
-            path="/protected/:id"
-            id={userLoggedIn}
+            path='/protected/:id'
+            id={currentUser}
             component={UserProfile}
           />
-          </Switch>
         </div>
       </UserContext.Provider>
     </weddingEventContext.Provider>
@@ -89,17 +91,17 @@ function App() {
 
 export default App;
 
-// export const ProtectedLink = ({ id }) => {
-//   const [hello, sethello] = useState("");
-//   // useEffect(() => {
-//   //   id.map(list => {
-//   //     return sethello(list.id);
-//   //   });
-//   // }, [id]);
+export const ProtectedLink = ({ id }) => {
+  const [hello, sethello] = useState('');
+  useEffect(() => {
+    id.map(list => {
+      return sethello(list.id);
+    });
+  }, [id]);
 
-//   return (
-//     <Link to={`/protected/${id.id}`} className="links">
-//       Add Post
-//     </Link>
-//   );
-// };
+  return (
+    <Link to={`/protected/${id.id}`} className='links'>
+      Add Post
+    </Link>
+  );
+};
