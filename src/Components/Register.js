@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from './Authentication/axiosWithAuth';
+import { Link } from 'react-router-dom';
 import '../App.css';
 
 export default function Register(props) {
@@ -110,7 +111,9 @@ export default function Register(props) {
           value={user.pricing}
           className='register-field'
         />
-
+        <p>
+          Already have an account? Sign in <Link to='/login'>here</Link>
+        </p>
         <input type='submit' className='button' />
       </form>
     </div>
