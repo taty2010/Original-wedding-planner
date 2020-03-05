@@ -73,7 +73,7 @@ function App() {
               );
             }}
           />
-          <Redirect exact from="/protected" to={`/protected/${userLoggedIn.id}`} />
+          <Redirect exact from="/protected" to={`/protected/${user.id}`} />
           <ProtectedRoute
             exact
             path="/protected/:id"

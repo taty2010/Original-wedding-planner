@@ -29,7 +29,7 @@ useEffect(() => {//GET users posts
 },[])
 
 const handleChanges = e => {
-  setNewPost({...userPosts, [e.target.name]:e.target.value})
+  setNewPost({...newPost, [e.target.name]:e.target.value})
 }
 
 const submit = e => {//Create new Posts
@@ -42,7 +42,10 @@ const submit = e => {//Create new Posts
   .catch(err=>{console.log('error',err)})
 }
 
-console.log('create props', userPosts)
+
+
+console.log('user posts', userPosts)
+  console.log('newPost', newPost)
 
   return (
     <>
@@ -86,8 +89,8 @@ console.log('create props', userPosts)
       <button>Post</button>
     </form>
     {userPosts.map(posts => {
-      return <Route to='protected/userposts' render={(props) =>{
-        return <UserPosts {...props} key={posts.id} posts={posts} updateUserPosts={setUserPosts}/>
+      return <Route to='/:id/posts/:pid' render={(props) =>{
+        return <UserPosts {...props} key={posts.description} posts={posts} userPosts={userPosts} updateUserPosts={setUserPosts}/>
       }}/>
     })}
     </>
