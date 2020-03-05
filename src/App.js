@@ -23,10 +23,10 @@ function App() {
 
   useEffect(() => {
     axiosWithAuth()
-            .get("https://weddingportfolio.herokuapp.com/weddingposts")
-            .then(res => setWeddingEvent(res.data))
-            .catch(err => console.log(err.response));
-  }, [])
+      .get('https://weddingportfolio.herokuapp.com/weddingposts')
+      .then(res => setWeddingEvent(res.data))
+      .catch(err => console.log(err.response));
+  }, []);
 
   useEffect(() => {
     axiosWithAuth()
@@ -46,14 +46,14 @@ function App() {
       <UserContext.Provider value={{user, setUser}}>
         <div className="App">
           <nav>
-            <div className="navigation">
-              <Link to="/" className="links">
+            <div className='navigation'>
+              <Link to='/' className='links'>
                 Home
               </Link>
-              <Link to="/register" className="links">
+              <Link to='/register' className='links'>
                 Register
               </Link>
-              <Link to="/login" className="links">
+              <Link to='/login' className='links'>
                 Login
               </Link>
               <Link to={`/protected/${userLoggedIn.id}`} className="links">
@@ -66,7 +66,7 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route
             exact
-            path="/login"
+            path='/login'
             render={props => {
               return (
                 <Login {...props} currentUser={userLoggedIn} userInfo={user} />

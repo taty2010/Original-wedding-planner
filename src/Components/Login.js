@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
-import { axiosWithAuth } from "./Authentication/axiosWithAuth";
-import UserContext from "../Contexts/UserContext";
-import { ProtectedLink } from "../App";
+import React, { useState, useContext, useEffect } from 'react';
+import { axiosWithAuth } from './Authentication/axiosWithAuth';
+import UserContext from '../Contexts/UserContext';
+import { ProtectedLink } from '../App';
 
 export default function Login(props) {
   const {userInfo, setUserInfo} = useContext(UserContext);
@@ -19,11 +19,11 @@ export default function Login(props) {
   //   const [getUserInfo, setGetUserInfo] = useState(currentUser)
 
 
-  console.log("login", props);
+  console.log('login', props);
 
   const [user, getUser] = useState({
-    username: "",
-    password: ""
+    username: '',
+    password: ''
   });
 
   // console.log("userid", props.currentUser[0]);
@@ -31,7 +31,7 @@ export default function Login(props) {
   const handleSubmit = e => {
     e.preventDefault()
     axiosWithAuth()
-      .post("/auth/login", user)
+      .post('/auth/login', user)
       .then(res => {
         localStorage.setItem("token", res.data.token);
         console.log("login form submitted",props);
@@ -40,8 +40,8 @@ export default function Login(props) {
         props.history.push(`/protected/${props.currentUser.id}`);
       })
       .catch(err => {
-        localStorage.removeItem("token");
-        console.log("Invalid Login", err);
+        localStorage.removeItem('token');
+        console.log('Invalid Login', err);
       });
       
   };
@@ -53,25 +53,27 @@ export default function Login(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="username"
-        name="username"
-        onChange={handleChanges}
-        value={user.username}
-      />
-      <input
-        type="text"
-        placeholder="password"
-        name="password"
-        onChange={handleChanges}
-        value={user.password}
-      />
+    <div className='form-container'>
+      <form className='login-form' onSubmit={handleSubmit}>
+        <input
+          type='text'
+          placeholder='username'
+          name='username'
+          onChange={handleChanges}
+          value={user.username}
+          className='field-container'
+        />
+        <input
+          type='text'
+          placeholder='password'
+          name='password'
+          onChange={handleChanges}
+          value={user.password}
+          className='field-container'
+        />
 
-      <input
-          type="submit" 
-      />
-    </form>
+        <input type='submit' />
+      </form>
+    </div>
   );
 }
