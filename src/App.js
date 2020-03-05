@@ -6,30 +6,30 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 
 // Components
-import weddingEventContext from "./Contexts/WeddingEventContext";
-import {axiosWithAuth} from './Components/Authentication/axiosWithAuth';
+import weddingEventContext from './Contexts/WeddingEventContext';
+import { axiosWithAuth } from './Components/Authentication/axiosWithAuth';
 import ProtectedRoute from './Components/Authentication/ProtectedRoute';
 import CreatePost from './Components/CreatePost';
-import axios from 'axios'
-import UserContext from "./Contexts/UserContext";
-import UserProfile from './Components/UserProfile'
+import axios from 'axios';
+import UserContext from './Contexts/UserContext';
+import UserProfile from './Components/UserProfile';
 
 function App() {
   const [savedList, setSavedList] = useState([]);
   const [weddingEvent, setWeddingEvent] = useState([]);
   const [user, setuser] = useState([]);
-  const userStorage = useState(localStorage.getItem("username"));
+  const userStorage = useState(localStorage.getItem('username'));
 
   useEffect(() => {
     axiosWithAuth()
-            .get("https://weddingportfolio.herokuapp.com/weddingposts")
-            .then(res => setWeddingEvent(res.data))
-            .catch(err => console.log(err.response));
-  }, [])
+      .get('https://weddingportfolio.herokuapp.com/weddingposts')
+      .then(res => setWeddingEvent(res.data))
+      .catch(err => console.log(err.response));
+  }, []);
 
   useEffect(() => {
     axiosWithAuth()
-      .get("https://weddingportfolio.herokuapp.com/auth/user")
+      .get('https://weddingportfolio.herokuapp.com/auth/user')
       .then(res => setuser(res.data.user))
       .catch(err => console.log(err.response));
   }, []);
@@ -38,21 +38,21 @@ function App() {
     return list.username === userStorage[0];
   });
 
-  console.log("current", currentUser);
+  console.log('current', currentUser);
 
   return (
     <weddingEventContext.Provider value={{ weddingEvent, setWeddingEvent }}>
       <UserContext.Provider value={user}>
-        <div className="App">
+        <div className='App'>
           <nav>
-            <div className="navigation">
-              <Link to="/" className="links">
+            <div className='navigation'>
+              <Link to='/' className='links'>
                 Home
               </Link>
-              <Link to="/register" className="links">
+              <Link to='/register' className='links'>
                 Register
               </Link>
-              <Link to="/login" className="links">
+              <Link to='/login' className='links'>
                 Login
               </Link>
               <ProtectedLink id={currentUser} />
@@ -61,11 +61,11 @@ function App() {
               </Link> */}
             </div>
           </nav>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/register" component={Register} />
+          <Route exact path='/' component={Home} />
+          <Route exact path='/register' component={Register} />
           <Route
             exact
-            path="/login"
+            path='/login'
             render={props => {
               return (
                 <Login {...props} currentUser={currentUser} userInfo={user} />
@@ -74,7 +74,7 @@ function App() {
           />
           <ProtectedRoute
             exact
-            path="/protected/:id"
+            path='/protected/:id'
             id={currentUser}
             component={UserProfile}
           />
@@ -87,7 +87,7 @@ function App() {
 export default App;
 
 export const ProtectedLink = ({ id }) => {
-  const [hello, sethello] = useState("");
+  const [hello, sethello] = useState('');
   useEffect(() => {
     id.map(list => {
       return sethello(list.id);
@@ -95,7 +95,7 @@ export const ProtectedLink = ({ id }) => {
   }, [id]);
 
   return (
-    <Link to={`/protected/${hello}`} className="links">
+    <Link to={`/protected/${hello}`} className='links'>
       Add Post
     </Link>
   );
