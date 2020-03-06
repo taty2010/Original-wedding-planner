@@ -27,7 +27,7 @@ export default function CreatePost(props) {
       .catch(err => {
         console.log('error', err);
       });
-  }, [userPosts]);
+  }, [newPost]);
 
   const handleChanges = e => {
     setNewPost({ ...newPost, [e.target.name]: e.target.value });
