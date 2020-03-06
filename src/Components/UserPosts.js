@@ -52,7 +52,7 @@ const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
   const update = e => {
     e.preventDefault();
     axiosWithAuth()
-      .put(`/auth/user/${match.params.id}/posts/${updatePost.id}`, updatePost)
+      .put(`/auth/user/${match.params.id}/post/${updatePost.id}`, updatePost)
       .then(res => {
         updateUserPosts(res.data);
         // setEditDesc(false)
