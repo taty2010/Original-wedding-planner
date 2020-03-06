@@ -6,6 +6,7 @@ export const axiosWithAuth = () => {
 
   return axios.create({
     headers: {
+      'Access-Control-Allow-Origin': '*',
       Authorization: token
     },
     baseURL: 'https://weddingportfolio.herokuapp.com'
