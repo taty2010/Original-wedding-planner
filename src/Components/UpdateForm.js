@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 
 
 const UpdateForm = ({posts, handleChanges, update, updatePost}) => {
+  // console.log(update);
+  console.log(updatePost);
+  // console.log(handleChanges);
 
     return(
         <form onSubmit={update}>

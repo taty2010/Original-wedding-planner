@@ -13,6 +13,7 @@ const initialItem ={
 
 
 const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
+  console.log(posts);
         const [editTheme, setEditTheme]= useState(false);
         const [editLocation, setEditLocation]= useState(false);
         const [editDesc, setEditDesc]= useState(false);
@@ -34,6 +35,7 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
 
     const handleChanges = e => {
         e.persist();
+        console.log(updatePost)
       setUpdatePost({...updatePost, [e.target.name]:e.target.value})
       console.log('changes', {[e.target.name]:e.target.value})
     }
@@ -41,7 +43,7 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
     const update = e => {
          e.preventDefault()
         axiosWithAuth()
-        .put(`/auth/user/${match.params.id}/posts/${updatePost.id}`, updatePost)
+        .put(`/auth/user/${match.params.id}/post/${updatePost.id}`, updatePost)
         .then(res => {
             updateUserPosts(res.data);
             // setEditDesc(false)
@@ -51,7 +53,7 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
 
       const remove = post => {
         axiosWithAuth()
-          .delete(`/auth/user/${match.params.id}/posts/${updatePost.id}`)
+          .delete(`/auth/user/${match.params.id}/post/${updatePost.id}`)
           .then(res => {
             console.log(res.data)
             updateUserPosts(userPosts.filter(item => item.id !== posts.id))

@@ -24,6 +24,7 @@ useEffect(() => {//GET users posts
   .get(`/auth/user/${paramItemId}/posts`)
   .then(res => {
        setUserPosts(res.data.posts)
+      console.log(res)
   })
   .catch(err=>{console.log('error',err)})
 },[])
