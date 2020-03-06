@@ -1,17 +1,27 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import {axiosWithAuth} from './Authentication/axiosWithAuth';
+import { axiosWithAuth } from './Authentication/axiosWithAuth';
+import Modal from './Modal';
 import UpdateForm from './UpdateForm';
+import trashcan from '../Assets/trashcan.png';
 
-const initialItem ={
-    theme: '',
-    location: '',
-    description: '',
-    image: '',
-    vendors: ''
-}
+const initialItem = {
+  theme: '',
+  location: '',
+  description: '',
+  image: '',
+  vendors: ''
+};
 
+const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
+  const [editTheme, setEditTheme] = useState(false);
+  const [editLocation, setEditLocation] = useState(false);
+  const [editDesc, setEditDesc] = useState(false);
+  const [editImg, setEditImg] = useState(false);
+  const [editVendor, setEditVendor] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
+<<<<<<< HEAD
 const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
   console.log(posts);
         const [editTheme, setEditTheme]= useState(false);
@@ -19,27 +29,39 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
         const [editDesc, setEditDesc]= useState(false);
         const [editImg, setEditImg]= useState(false);
         const [editVendor, setEditVendor]= useState(false);
+=======
+  const [updatePost, setUpdatePost] = useState(initialItem);
+>>>>>>> b1d2d89b3f156fbf6aad00fc8328d846fc24b346
 
-    const [updatePost, setUpdatePost] = useState(initialItem)
+  const openModal = () => {
+    setShowModal(true);
+    console.log('modal open');
+  };
 
-    useEffect(() => {
-        const selectedItem = userPosts.find(item => {
-            console.log(item.id)
-           return item.id === posts.id 
-        });
-        console.log(selectedItem);
-        if (selectedItem) {
-            setUpdatePost(selectedItem);
-        }
-      }, [userPosts, posts.id ]);
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
+<<<<<<< HEAD
     const handleChanges = e => {
         e.persist();
         console.log(updatePost)
       setUpdatePost({...updatePost, [e.target.name]:e.target.value})
       console.log('changes', {[e.target.name]:e.target.value})
+=======
+  useEffect(() => {
+    const selectedItem = userPosts.find(item => {
+      console.log(item.id);
+      return item.id === posts.id;
+    });
+    console.log(selectedItem);
+    if (selectedItem) {
+      setUpdatePost(selectedItem);
+>>>>>>> b1d2d89b3f156fbf6aad00fc8328d846fc24b346
     }
+  }, [userPosts, posts.id]);
 
+<<<<<<< HEAD
     const update = e => {
          e.preventDefault()
         axiosWithAuth()
@@ -62,15 +84,53 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
           .catch(err => console.log(err.response))
       };
       
+=======
+  const handleChanges = e => {
+    e.persist();
+    setUpdatePost({ ...updatePost, [e.target.name]: e.target.value });
+    console.log('changes', { [e.target.name]: e.target.value });
+  };
 
+  const update = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .put(`/auth/user/${match.params.id}/posts/${updatePost.id}`, updatePost)
+      .then(res => {
+        updateUserPosts(res.data);
+        // setEditDesc(false)
+        console.log('update posts', res.data);
+      })
+      .catch(err => console.log('Error', err));
+  };
+>>>>>>> b1d2d89b3f156fbf6aad00fc8328d846fc24b346
 
-    //    console.log('editing image', userPosts)
-    return(
-    <div className='user-posts'>
-        <button onClick={e => remove()}>delete</button>
+  const remove = post => {
+    axiosWithAuth()
+      .delete(`/auth/user/${match.params.id}/post/${updatePost.id}`)
+      .then(res => {
+        console.log(res.data);
+        updateUserPosts(userPosts.filter(item => item.id !== posts.id));
+      })
+      .catch(err => console.log(err.response));
+  };
+
+  //    console.log('editing image', userPosts)
+  return (
+    <div>
+      <div className='user-posts'>
         {/* {!editImg ? ( */}
-            <img onClick={(e)=> {e.stopPropagation(); setEditImg(!editImg)}} src={posts.image} alt={posts.description}/>
-        {/* ):(
+        <div className='post-info'>
+          <div className='preview-img'>
+            <img
+              onClick={e => {
+                e.stopPropagation();
+                setEditImg(!editImg);
+              }}
+              src={posts.image}
+              alt={posts.description}
+            />
+          </div>
+          {/* ):(
             <form onSubmit={update}>
             <input
                     type='text'
@@ -82,9 +142,16 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
             <button>Update</button>
             </form>
         ) }  */}
-        {/* {!editDesc? ( */}
-            <h1 onClick={(e)=> {setEditDesc(!editDesc)}}>{posts.description}</h1>
-        {/* ):(
+          {/* {!editDesc? ( */}
+          <div className='post-text'>
+            <h4
+              onClick={e => {
+                setEditDesc(!editDesc);
+              }}
+            >
+              {posts.description},
+            </h4>
+            {/* ):(
             <form onSubmit={update}>
             <input
                     type='text'
@@ -97,8 +164,15 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
             </form>
         ) }
         { !editTheme ? ( */}
-            <h3 onClick={(e)=> {e.stopPropagation(); setEditTheme(!editTheme)}}>{posts.theme}</h3>
-        {/* ):(
+            <p
+              onClick={e => {
+                e.stopPropagation();
+                setEditTheme(!editTheme);
+              }}
+            >
+              <b>Theme:</b> {posts.theme},
+            </p>
+            {/* ):(
             <form onSubmit={update}>
             <input
                     type='text'
@@ -111,7 +185,14 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
             </form>
             )}
             { !editLocation ? ( */}
-                <p onClick={(e)=> {e.stopPropagation(); setEditLocation(!editLocation)}}>Location: {posts.location}</p>
+            <p
+              onClick={e => {
+                e.stopPropagation();
+                setEditLocation(!editLocation);
+              }}
+            >
+              <b>Location:</b> {posts.location},
+            </p>
             {/* ):(
                 <form onSubmit={update}>
                   <input
@@ -125,8 +206,30 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
                 </form>
             )}
             {!editVendor ? ( */}
-                <p onClick={(e)=> {e.stopPropagation(); setEditVendor(!editVendor)}}>Vendors: {posts.vendors}</p>
-            {/* ):(
+            <p
+              onClick={e => {
+                e.stopPropagation();
+                setEditVendor(!editVendor);
+              }}
+            >
+              <b>Vendors:</b> {posts.vendors}
+            </p>
+          </div>
+        </div>
+        <div className='edit-delete'>
+          <Modal show={showModal} handleClose={closeModal}>
+            <UpdateForm
+              handleChanges={handleChanges}
+              update={update}
+              updateUserPosts={updateUserPosts}
+              userPosts={userPosts}
+              updatePost={updatePost}
+            />
+          </Modal>
+          <p onClick={openModal}>EDIT</p>
+          <img src={trashcan} onClick={e => remove()} />
+        </div>
+        {/* ):(
                   <form onSubmit={update}>
                   <input
                     type='text'
@@ -138,9 +241,9 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
                   <button>Update</button>
                   </form>
               )} */}
-              <UpdateForm handleChanges={handleChanges} update={update} updateUserPosts={updateUserPosts} userPosts={userPosts} updatePost={updatePost}/>
-        </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default UserPosts
+export default UserPosts;

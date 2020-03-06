@@ -13,6 +13,8 @@ import ProtectedRoute from './Components/Authentication/ProtectedRoute';
 import CreatePost from './Components/CreatePost';
 import axios from 'axios';
 import UserProfile from './Components/UserProfile';
+import profileIcon from './Assets/user-circle-solid.png';
+import ringIcon from './Assets/wedding-rings-black.png';
 
 function App() {
   const [savedList, setSavedList] = useState([]);
@@ -51,18 +53,24 @@ function App() {
         <div className='App'>
           <nav>
             <div className='navigation'>
-              <Link to='/' className='links'>
-                Home
+              <Link to='/' className='logo'>
+                <img src={ringIcon} />
+                <h1>Wedding Planner Portfolio</h1>
               </Link>
-              <Link to='/register' className='links'>
-                Register
-              </Link>
-              <Link to='/login' className='links'>
-                Login
-              </Link>
-              {localStorage.getItem('token') ? (
-                <ProtectedLink id={currentUser} />
-              ) : null}
+              <div className='link-container'>
+                <Link to='/' className='links'>
+                  Home
+                </Link>
+                <Link to='/register' className='links'>
+                  Register
+                </Link>
+                <Link to='/login' className='links'>
+                  Login
+                </Link>
+                {localStorage.getItem('token') ? (
+                  <ProtectedLink id={currentUser} />
+                ) : null}
+              </div>
             </div>
           </nav>
           <Route exact path='/' component={Home} />
@@ -100,7 +108,7 @@ export const ProtectedLink = ({ id }) => {
 
   return (
     <Link to={`/protected/${hello}`} className='links'>
-      My Profile
+      <img src={profileIcon} alt={'My Profile'} />
     </Link>
   );
 };

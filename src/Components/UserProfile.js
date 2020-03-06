@@ -4,6 +4,7 @@ import UserContext from '../Contexts/UserContext';
 import Login from './Login';
 import { Route, Link } from 'react-router-dom';
 import CreatePost from './CreatePost';
+import '../App.css';
 
 const UserProfile = props => {
   const userInfo = useContext(UserContext);
@@ -16,23 +17,28 @@ const UserProfile = props => {
 
   return (
     <div className='user'>
-      <div>
-        <h1>
-          Name: {Object(getUser).firstName} {Object(getUser).lastName}
-        </h1>
-        <h2>
-          Location: {Object(getUser).city} {Object(getUser).state}
-        </h2>
-        <p>Phone: {Object(getUser).phoneNumber}</p>
-        <p>Email: {Object(getUser).email}</p>
-        <p>Pricing: {Object(getUser).pricing}</p>
+      <div className='user-header'>
+        <div className='user-text-container'>
+          <h1>
+            {Object(getUser).firstName} {Object(getUser).lastName}
+          </h1>
+          <h3>
+            {Object(getUser).city} {Object(getUser).state}
+          </h3>
+          <p>Phone: {Object(getUser).phoneNumber}</p>
+          <p>Email: {Object(getUser).email}</p>
+          <p>Pricing: {Object(getUser).pricing}</p>
+        </div>
       </div>
-      <Route
-        to='createpost'
-        render={props => {
-          return <CreatePost {...props} user={userInfo} />;
-        }}
-      />
+      <div className='create-post'>
+        <h2>My Posts</h2>
+        <Route
+          to='createpost'
+          render={props => {
+            return <CreatePost {...props} user={userInfo} />;
+          }}
+        />
+      </div>
     </div>
   );
 };
