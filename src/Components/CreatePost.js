@@ -27,7 +27,7 @@ export default function CreatePost(props) {
       .catch(err => {
         console.log('error', err);
       });
-  }, []);
+  }, [userPosts]);
 
   const handleChanges = e => {
     setNewPost({ ...newPost, [e.target.name]: e.target.value });
@@ -39,7 +39,7 @@ export default function CreatePost(props) {
     axiosWithAuth()
       .post(`/auth/user/${paramItemId}/posts`, newPost)
       .then(res => {
-        setUserPosts(res.data);
+        setNewPost(res.data);
       })
       .catch(err => {
         console.log('error', err);
