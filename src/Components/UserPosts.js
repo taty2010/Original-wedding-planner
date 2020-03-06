@@ -33,10 +33,11 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
       }, [userPosts, posts.id ]);
 
     const handleChanges = e => {
-        e.persist();
       setUpdatePost({...updatePost, [e.target.name]:e.target.value})
       console.log('changes', {[e.target.name]:e.target.value})
     }
+
+    console.log('handleChanges', updatePost)
 
     const update = e => {
          e.preventDefault()
