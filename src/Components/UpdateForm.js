@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const UpdateForm = ({ posts, handleChanges, update, updatePost }) => {
   return (

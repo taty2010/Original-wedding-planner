@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Route, Link, Switch, Redirect } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import Home from './Components/Home';
 import Login from './Components/Login';
 import Register from './Components/Register';
@@ -10,14 +10,11 @@ import weddingEventContext from './Contexts/WeddingEventContext';
 import UserContext from './Contexts/UserContext';
 import { axiosWithAuth } from './Components/Authentication/axiosWithAuth';
 import ProtectedRoute from './Components/Authentication/ProtectedRoute';
-import CreatePost from './Components/CreatePost';
-import axios from 'axios';
 import UserProfile from './Components/UserProfile';
 import profileIcon from './Assets/user-circle-solid.png';
 import ringIcon from './Assets/wedding-rings-black.png';
 
 function App() {
-  const [savedList, setSavedList] = useState([]);
   const [weddingEvent, setWeddingEvent] = useState([]);
   const [user, setUser] = useState([]);
   const [userLoggedIn, setUserLoggedIn] = useState([]);
@@ -54,7 +51,7 @@ function App() {
           <nav>
             <div className='navigation'>
               <Link to='/' className='logo'>
-                <img src={ringIcon} />
+                <img src={ringIcon} alt='logo' />
                 <h1>Wedding Planner Portfolio</h1>
               </Link>
               <div className='link-container'>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import { axiosWithAuth } from './Authentication/axiosWithAuth';
 import Modal from './Modal';
 import UpdateForm from './UpdateForm';
@@ -52,7 +51,7 @@ const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
   const update = e => {
     e.preventDefault();
     axiosWithAuth()
-      .put(`/auth/user/${match.params.id}/posts/${updatePost.id}`, updatePost)
+      .put(`/auth/user/${match.params.id}/post/${updatePost.id}`, updatePost)
       .then(res => {
         updateUserPosts(res.data);
         // setEditDesc(false)
@@ -65,17 +64,14 @@ const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
     axiosWithAuth()
       .delete(`/auth/user/${match.params.id}/post/${updatePost.id}`)
       .then(res => {
-        console.log(res.data);
         updateUserPosts(userPosts.filter(item => item.id !== posts.id));
       })
       .catch(err => console.log(err.response));
   };
 
-  //    console.log('editing image', userPosts)
   return (
     <div>
       <div className='user-posts'>
-        {/* {!editImg ? ( */}
         <div className='post-info'>
           <div className='preview-img'>
             <img
@@ -87,19 +83,6 @@ const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
               alt={posts.description}
             />
           </div>
-          {/* ):(
-            <form onSubmit={update}>
-            <input
-                    type='text'
-                    name='newImage'
-                    placeholder={posts.image}
-                    onChange={handleChanges}
-                    value={updatePost.newImage}
-            />
-            <button>Update</button>
-            </form>
-        ) }  */}
-          {/* {!editDesc? ( */}
           <div className='post-text'>
             <h4
               onClick={e => {
@@ -108,19 +91,6 @@ const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
             >
               {posts.description},
             </h4>
-            {/* ):(
-            <form onSubmit={update}>
-            <input
-                    type='text'
-                    name='newDescription'
-                    placeholder={posts.description}
-                    onChange={handleChanges}
-                    value={updatePost.newDescription}
-            />
-            <button>Update</button>
-            </form>
-        ) }
-        { !editTheme ? ( */}
             <p
               onClick={e => {
                 e.stopPropagation();
@@ -129,19 +99,6 @@ const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
             >
               <b>Theme:</b> {posts.theme},
             </p>
-            {/* ):(
-            <form onSubmit={update}>
-            <input
-                    type='text'
-                    name='newTheme'
-                    placeholder={posts.theme}
-                    onChange={handleChanges}
-                    value={updatePost.newTheme}
-            />
-            <button>Update</button>
-            </form>
-            )}
-            { !editLocation ? ( */}
             <p
               onClick={e => {
                 e.stopPropagation();
@@ -150,19 +107,6 @@ const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
             >
               <b>Location:</b> {posts.location},
             </p>
-            {/* ):(
-                <form onSubmit={update}>
-                  <input
-                    type='text'
-                    name='newLocation'
-                    placeholder={posts.location}
-                    onChange={handleChanges}
-                    value={updatePost.newLocation}
-                  />
-                  <button>Update</button>
-                </form>
-            )}
-            {!editVendor ? ( */}
             <p
               onClick={e => {
                 e.stopPropagation();
@@ -184,20 +128,8 @@ const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
             />
           </Modal>
           <p onClick={openModal}>EDIT</p>
-          <img src={trashcan} onClick={e => remove()} />
+          <img src={trashcan} onClick={e => remove()} alt='delete' />
         </div>
-        {/* ):(
-                  <form onSubmit={update}>
-                  <input
-                    type='text'
-                    name='newVendors'
-                    placeholder={posts.vendors}
-                    onChange={handleChanges}
-                    value={updatePost.newVendors}
-                  />
-                  <button>Update</button>
-                  </form>
-              )} */}
       </div>
     </div>
   );

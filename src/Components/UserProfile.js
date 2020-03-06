@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { axiosWithAuth } from './Authentication/axiosWithAuth';
+import React, { useContext } from 'react';
 import UserContext from '../Contexts/UserContext';
-import Login from './Login';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import CreatePost from './CreatePost';
 import '../App.css';
 

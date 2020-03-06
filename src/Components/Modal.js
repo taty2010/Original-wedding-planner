@@ -9,7 +9,12 @@ const Modal = ({ handleClose, show, children }) => {
       <section className='modal-main'>
         <div className='modal-header'>
           <h1>Update Post</h1>
-          <img src={close} className='close-modal' onClick={handleClose} />
+          <img
+            src={close}
+            className='close-modal'
+            onClick={handleClose}
+            alt='close'
+          />
         </div>
         {children}
       </section>

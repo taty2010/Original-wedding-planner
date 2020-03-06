@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import UserProfile from './UserProfile';
 import { axiosWithAuth } from './Authentication/axiosWithAuth';
-import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 import '../App.css';
 
@@ -47,9 +45,6 @@ export default function CreatePost(props) {
         console.log('error', err);
       });
   };
-
-  console.log('user posts', userPosts);
-  console.log('newPost', newPost);
 
   return (
     <>

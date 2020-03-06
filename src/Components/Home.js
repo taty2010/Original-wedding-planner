@@ -1,6 +1,4 @@
-import React, { useEffect, useContext } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
 import WeddingCard from './WeddingCard';
 import '../App.css';
 import weddingEventContext from '../Contexts/WeddingEventContext';
@@ -26,12 +24,3 @@ export default function Home() {
     </div>
   );
 }
-// }
-
-// function EventDetails({event}) {
-//     return (
-//         <Link to={`/weddingevent/${event.id}`}>
-//             <WeddingCard event={event} />
-//         </Link>
-//     )
-// }
