@@ -21,17 +21,7 @@ const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
   const [editVendor, setEditVendor] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-<<<<<<< HEAD
-const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
-  console.log(posts);
-        const [editTheme, setEditTheme]= useState(false);
-        const [editLocation, setEditLocation]= useState(false);
-        const [editDesc, setEditDesc]= useState(false);
-        const [editImg, setEditImg]= useState(false);
-        const [editVendor, setEditVendor]= useState(false);
-=======
   const [updatePost, setUpdatePost] = useState(initialItem);
->>>>>>> b1d2d89b3f156fbf6aad00fc8328d846fc24b346
 
   const openModal = () => {
     setShowModal(true);
@@ -42,13 +32,6 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
     setShowModal(false);
   };
 
-<<<<<<< HEAD
-    const handleChanges = e => {
-        e.persist();
-        console.log(updatePost)
-      setUpdatePost({...updatePost, [e.target.name]:e.target.value})
-      console.log('changes', {[e.target.name]:e.target.value})
-=======
   useEffect(() => {
     const selectedItem = userPosts.find(item => {
       console.log(item.id);
@@ -57,34 +40,9 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
     console.log(selectedItem);
     if (selectedItem) {
       setUpdatePost(selectedItem);
->>>>>>> b1d2d89b3f156fbf6aad00fc8328d846fc24b346
     }
   }, [userPosts, posts.id]);
 
-<<<<<<< HEAD
-    const update = e => {
-         e.preventDefault()
-        axiosWithAuth()
-        .put(`/auth/user/${match.params.id}/post/${updatePost.id}`, updatePost)
-        .then(res => {
-            updateUserPosts(res.data);
-            // setEditDesc(false)
-            console.log('update posts', res.data)
-        }).catch(err=>console.log('Error',err))
-      }
-
-      const remove = post => {
-        axiosWithAuth()
-          .delete(`/auth/user/${match.params.id}/post/${updatePost.id}`)
-          .then(res => {
-            console.log(res.data)
-            updateUserPosts(userPosts.filter(item => item.id !== posts.id))
-            
-          })
-          .catch(err => console.log(err.response))
-      };
-      
-=======
   const handleChanges = e => {
     e.persist();
     setUpdatePost({ ...updatePost, [e.target.name]: e.target.value });
@@ -94,7 +52,7 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
   const update = e => {
     e.preventDefault();
     axiosWithAuth()
-      .put(`/auth/user/${match.params.id}/posts/${updatePost.id}`, updatePost)
+      .put(`/auth/user/${match.params.id}/post/${updatePost.id}`, updatePost)
       .then(res => {
         updateUserPosts(res.data);
         // setEditDesc(false)
@@ -102,7 +60,6 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
       })
       .catch(err => console.log('Error', err));
   };
->>>>>>> b1d2d89b3f156fbf6aad00fc8328d846fc24b346
 
   const remove = post => {
     axiosWithAuth()

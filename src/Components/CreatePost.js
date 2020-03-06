@@ -19,32 +19,6 @@ export default function CreatePost(props) {
     vendors: ''
   });
 
-<<<<<<< HEAD
-  
-useEffect(() => {//GET users posts
-  axiosWithAuth()
-  .get(`/auth/user/${paramItemId}/posts`)
-  .then(res => {
-       setUserPosts(res.data.posts)
-      console.log(res)
-  })
-  .catch(err=>{console.log('error',err)})
-},[])
-
-const handleChanges = e => {
-  setNewPost({...newPost, [e.target.name]:e.target.value})
-}
-
-const submit = e => {//Create new Posts
-  e.preventDefault()
-  axiosWithAuth()
-  .post(`/auth/user/${paramItemId}/posts`, newPost)
-  .then(res => {
-    setUserPosts(res.data)
-  })
-  .catch(err=>{console.log('error',err)})
-}
-=======
   useEffect(() => {
     //GET users posts
     axiosWithAuth()
@@ -56,7 +30,6 @@ const submit = e => {//Create new Posts
         console.log('error', err);
       });
   }, []);
->>>>>>> b1d2d89b3f156fbf6aad00fc8328d846fc24b346
 
   const handleChanges = e => {
     setNewPost({ ...newPost, [e.target.name]: e.target.value });
