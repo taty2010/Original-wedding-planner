@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { axiosWithAuth } from './Authentication/axiosWithAuth';
 import UserContext from '../Contexts/UserContext';
 import { ProtectedLink } from '../App';
+import '../App.css';
 
 export default function Login(props) {
   const { userInfo, setUserInfo } = useContext(UserContext);
@@ -19,8 +20,6 @@ export default function Login(props) {
     username: '',
     password: ''
   });
-
-  console.log(props);
 
   const handleSubmit = e => {
     e.preventDefault();
