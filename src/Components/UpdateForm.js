@@ -1,6 +1,7 @@
 import React from 'react';
 
 const UpdateForm = ({ posts, handleChanges, update, updatePost }) => {
+
   return (
     <form onSubmit={update} className='create-post-form'>
       <input
@@ -39,7 +40,7 @@ const UpdateForm = ({ posts, handleChanges, update, updatePost }) => {
         className='create-field-container'
       />
       <div className='modal-button'>
-        <button>Update</button>
+        <button type="submit">Update</button>
       </div>
     </form>
   );

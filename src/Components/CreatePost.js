@@ -17,6 +17,8 @@ export default function CreatePost(props) {
     vendors: ''
   });
 
+  console.log(userPosts);
+
   useEffect(() => {
     //GET users posts
     axiosWithAuth()
@@ -92,8 +94,10 @@ export default function CreatePost(props) {
         <button className='add-button'>Post</button>
       </form>
       {userPosts.map(posts => {
+        console.log(posts)
         return (
           <Route
+          key={posts.id}
             to='/:id/posts/:pid'
             render={props => {
               return (
@@ -103,6 +107,7 @@ export default function CreatePost(props) {
                   posts={posts}
                   userPosts={userPosts}
                   updateUserPosts={setUserPosts}
+                  paramItemId={paramItemId}
                 />
               );
             }}

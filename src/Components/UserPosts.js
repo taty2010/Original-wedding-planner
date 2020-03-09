@@ -12,7 +12,7 @@ const initialItem = {
   vendors: ''
 };
 
-const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
+const UserPosts = ({ posts, match, updateUserPosts, userPosts, paramItemId }) => {
   const [editTheme, setEditTheme] = useState(false);
   const [editLocation, setEditLocation] = useState(false);
   const [editDesc, setEditDesc] = useState(false);
@@ -43,8 +43,8 @@ const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
   }, [userPosts, posts.id]);
 
   const handleChanges = e => {
-    e.persist();
-    setUpdatePost({ ...updatePost, [e.target.name]: e.target.value });
+    // e.persist();
+    setUpdatePost({...updatePost, [e.target.name]: e.target.value });
     console.log('changes', { [e.target.name]: e.target.value });
   };
 
@@ -53,9 +53,14 @@ const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
     axiosWithAuth()
       .put(`/auth/user/${match.params.id}/post/${updatePost.id}`, updatePost)
       .then(res => {
-        updateUserPosts(res.data);
+        axiosWithAuth()
+        .get(`/auth/user/${paramItemId}/posts`)
+        .then(response => {
+          setUpdatePost(response.data)
+          window.location.reload()
+        })
         // setEditDesc(false)
-        console.log('update posts', res.data);
+       
       })
       .catch(err => console.log('Error', err));
   };
@@ -125,6 +130,8 @@ const UserPosts = ({ posts, match, updateUserPosts, userPosts }) => {
               updateUserPosts={updateUserPosts}
               userPosts={userPosts}
               updatePost={updatePost}
+              setUpdatePost={setUpdatePost}
+              paramItemId={paramItemId}
             />
           </Modal>
           <p onClick={openModal}>EDIT</p>
