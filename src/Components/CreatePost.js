@@ -93,6 +93,7 @@ export default function CreatePost(props) {
         />
         <button className='add-button'>Post</button>
       </form>
+      <div className='post-wrapper'>
       {userPosts.map(posts => {
         console.log(posts)
         return (
@@ -114,6 +115,7 @@ export default function CreatePost(props) {
           />
         );
       })}
+      </div>
     </>
   );
 }

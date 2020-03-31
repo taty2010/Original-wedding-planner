@@ -11,13 +11,13 @@ const WeddingCard = props => {
             <p>{props.description}</p>
           </div>
         </div>
-        <div className='wedding-card-back'>
+        {/* <div className='wedding-card-back'>
           <div className='text-container'>
             <p>Location: {props.location}</p>
             <p>Theme: {props.theme}</p>
             <p>Vendors: {props.vendors}</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

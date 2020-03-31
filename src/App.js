@@ -88,6 +88,18 @@ function App() {
             component={UserProfile}
           />
         </div>
+        <footer>
+          <div className='offer-wrapper'>
+            <div className='services'>
+              <h2>Contact Us</h2>
+              <ul>
+                <li>Address:</li>
+                <li>Phone:</li>
+                <li>Email:</li>
+              </ul>
+            </div>
+          </div>
+        </footer>
       </UserContext.Provider>
     </weddingEventContext.Provider>
   );
