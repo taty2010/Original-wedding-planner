@@ -40,7 +40,7 @@ const UserPosts = ({posts, match, updateUserPosts, userPosts}) => {
     console.log('handleChanges', updatePost)
 
     const update = e => {
-         e.preventDefault()
+        //  e.preventDefault()
         axiosWithAuth()
         .put(`/auth/user/${match.params.id}/post/${updatePost.id}`, updatePost)
         .then(res => {

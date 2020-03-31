@@ -33,7 +33,7 @@ const handleChanges = e => {
 }
 
 const submit = e => {//Create new Posts
-  e.preventDefault()
+  // e.preventDefault()
   axiosWithAuth()
   .post(`/auth/user/${paramItemId}/posts`, newPost)
   .then(res => {
