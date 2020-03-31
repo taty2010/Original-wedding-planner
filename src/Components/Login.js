@@ -1,12 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from './Authentication/axiosWithAuth';
-import UserContext from '../Contexts/UserContext';
-import { ProtectedLink } from '../App';
+import '../App.css';
 
 export default function Login(props) {
-  const { userInfo, setUserInfo } = useContext(UserContext);
-  const userStorage = useState(localStorage.getItem('username'));
   const [id, setid] = useState(props.currentUser);
 
   useEffect(() => {
@@ -19,8 +16,6 @@ export default function Login(props) {
     username: '',
     password: ''
   });
-
-  console.log(props);
 
   const handleSubmit = e => {
     e.preventDefault();
