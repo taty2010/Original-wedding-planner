@@ -11,14 +11,13 @@ const WeddingCard = props => {
             <p>{props.description}</p>
           </div>
         </div>
-        <div className='wedding-card-back'>
-          <p>Wedding Location: {props.location}</p>
-          <p>Wedding Theme: {props.theme}</p>
-          <p>Wedding Vendors: {props.vendors}</p>
-        </div>
-        {/* {props.vendors.map(vendor => (
-        <div key={vendor} className="vendors">
-          {vendor} */}
+        {/* <div className='wedding-card-back'>
+          <div className='text-container'>
+            <p>Location: {props.location}</p>
+            <p>Theme: {props.theme}</p>
+            <p>Vendors: {props.vendors}</p>
+          </div>
+        </div> */}
       </div>
     </div>
   );
