@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from './Authentication/axiosWithAuth';
-import '../App.css';
 
 export default function Login(props) {
   const [id, setid] = useState(props.currentUser);

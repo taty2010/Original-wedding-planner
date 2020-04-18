@@ -26,9 +26,9 @@
 }
 
 header {
+  height: 30vh;
+  width: 100%;
   display: flex;
-  height: 60vh;
-  width: 95vw;
   margin: 0 auto;
   justify-content: flex-end;
   justify-content: center;
@@ -38,6 +38,10 @@ header {
   background-repeat: no-repeat;
   /* background-attachment: fixed; */
   align-items: center;
+  @media only screen and (min-width: 700px){
+    height: 60vh;
+    width: 95vw;
+  }
 }
 
 .desc{
@@ -61,30 +65,40 @@ header {
   height: 55vh;
   width: 95vw;
   margin: 0 auto;
-}
-
-.offer-wrapper .services{
-  position: absolute;
-  left: 15vw;
-  top: 111vh;
-  background-color: white;
-  height: 40vh;
-  width: 70vw;
-  border-radius: 5vw;
+  .services{
+    position: absolute;
+    left: 15vw;
+    top: 80vh;
+    background-color: white;
+    height: 45vh;
+    width: 70vw;
+    border-radius: 5vw;
+    @media only screen and (min-width: 700px){
+      top: 111vh;
+      height: 40vh;
+    }
+  }
 }
 
 .services h2{
   font-family: 'Amatic SC', cursive;
   font-size: 4vw;
+  @media only screen and (min-width: 700px){
+    margin: 1vh 0;
+  }
 }
 
 .services ul{
   text-decoration: none;
   list-style: none;
   display: flex;
+  flex-flow: column;
   justify-content: space-around;
   align-items: center;
   padding: 0 2vw;
+  @media only screen and (min-width: 700px){
+    flex-flow: row;
+  }
 }
 
 .services ul li {
@@ -94,9 +108,12 @@ header {
 }
 
 .services ul li i{
-  font-size: 8vw;
+  font-size: 5vw;
   padding-bottom: 3vh;
   color: #354b64;
+  // @media only screen and (min-width: 700px){
+  //   font-size: 8vw
+  // }
 }
 
 .offer-wrapper .box{
@@ -277,8 +294,16 @@ button {
 .home {
   display: flex;
   flex-wrap: wrap;
+  flex-flow: column;
   justify-content: center;
+  align-items: center;
   margin-top: 5vh;
+  @media only screen and (min-width: 700px){
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-top: 5vh;
+  }
 }
 
 .field-container {
@@ -375,6 +400,9 @@ button {
   justify-content: center;
   align-items: center;
   margin: 2vh 0;
+  @media only screen and (min-width: 700px){
+    width: 40vw;
+  }
 }
 
 .wedding-card {
@@ -394,7 +422,7 @@ button {
 
 .wedding-card-front {
   position: absolute;
-  width: 100%;
+  width: 90vw;
   height: 100%;
   backface-visibility: hidden;
   display: flex;
@@ -402,12 +430,18 @@ button {
   justify-content: center;
   /* background: #f2f2f2;
   border-radius: 10px; */
+  @media only screen and (min-width: 700px){
+    width: 100%;
+  }
 }
 
 .wedding-card-front img {
   max-height: 200px;
-  width: 30vw;
+  width: 50vw;
   margin: 1vh auto;
+  @media only screen and (min-width: 700px){
+    width: 25vw;
+  }
 }
 
 .wedding-card-back {
@@ -465,10 +499,14 @@ button {
 
 footer .offer-wrapper{
   display: flex;
-  height: 40vh;
+  height: 50vh;
   width: 100%;
   /* margin: 5vh auto; */
   background-color: #fdcdcb;
+  @media only screen and (min-width: 700px){
+    height: 80vh;
+    align-items: center;
+  }
 }
 footer .offer-wrapper .services{
   position: relative;
@@ -477,6 +515,12 @@ footer .offer-wrapper .services{
   background-color: white;
   height: 30vh;
   width: 70vw;
+  @media only screen and (min-width: 700px){
+    justify-content: center;
+    height: 50vh;
+    display: flex;
+    flex-flow: column;
+  }
 }
 
 footer .services h2{
@@ -500,11 +544,11 @@ footer .services ul li {
   padding-top: 3vh;
 }
 
-.services ul li i{
-  font-size: 8vw;
-  padding-bottom: 3vh;
-  color: #354b64;
-}
+// .services ul li i{
+//   font-size: 8vw;
+//   padding-bottom: 3vh;
+//   color: #354b64;
+// }
 
 footer .offer-wrapper .left{
   background-color: #fdcdcb;

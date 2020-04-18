@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from './Authentication/axiosWithAuth';
 import { Route } from 'react-router-dom';
-import '../App.css';
 
 //Components
 import UserPosts from './UserPosts';

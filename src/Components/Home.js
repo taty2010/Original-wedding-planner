@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import WeddingCard from './WeddingCard';
-import '../App.css';
 import weddingEventContext from '../Contexts/WeddingEventContext';
 
 export default function Home() {

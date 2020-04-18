@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import UserContext from '../Contexts/UserContext';
 import { Route } from 'react-router-dom';
 import CreatePost from './CreatePost';
-import '../App.css';
 
 const UserProfile = props => {
   const userInfo = useContext(UserContext);

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from './Authentication/axiosWithAuth';
 import { Link } from 'react-router-dom';
-import '../App.css';
 
 export default function Register(props) {
   const [user, getUser] = useState({
